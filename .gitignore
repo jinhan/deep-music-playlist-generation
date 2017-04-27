@@ -1,0 +1,5 @@
+mysite/__pycahe__/
+*.sock
+recomm/engines/
+recomm/migrations/
+recomm/__pycahe__/
