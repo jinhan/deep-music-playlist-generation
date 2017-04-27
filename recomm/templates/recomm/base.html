@@ -1,0 +1,51 @@
+{% load staticfiles %}
+{% load static %}
+
+<html>
+    <head>
+        <title>딥 브금리스트</title>
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap-theme.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'bootstrap/js/bootstrap.min.js' %}" type="text/javascript">
+        <link rel="stylesheet" href="http://vjs.zencdn.net/5.8.8/video-js.css" type="text/css">
+        <link rel="stylesheet" href="{% static 'css/video-js-custom.css' %}" type="text/css">
+        <link rel="stylesheet" href="{% static 'likert/bootstrap-star-rating/css/star-rating.min.css' %}" type="text/css">
+        <script src="http://vjs.zencdn.net/5.8.8/video.js"></script>
+        <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+        <script src="{% static 'likert/bootstrap-star-rating/js/star-rating.min.js' %}" type="text/javascript"></script>
+        <link rel="stylesheet" href="{% static 'css/sticky-footer.css' %}" type="text/css">
+
+
+    </head>
+
+    <body>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-xs-10 col-xs-offset-1">
+                    <div class="page-header">
+                        <h1><a href="/" style="color:#777;"><center>딥 브금리스트</a></h1>
+                    </div>
+                </div>
+            </div>
+
+            {% block content %}
+            {% endblock %}
+        </div>
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-xs-10 col-xs-offset-1">
+                        <!-- <span><a href="http://hcc.snu.ac.kr" style="color:#777;">서울대학교 인간중심컴퓨팅연구실</a></span> -->
+                        <span style="float:right;"><a href="mailto:jinhanchoi@snu.ac.kr" style="color:#777;">이메일</a></span>
+                    </div>
+                </div>
+            </div>
+        </footer>
+
+
+        {% block scripts %}
+        {% endblock %}
+
+    </body>
+</html>

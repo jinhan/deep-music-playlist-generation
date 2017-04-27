@@ -1,0 +1,20 @@
+{% extends 'recomm/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="row">
+	<div class="col-xs-8 col-xs-offset-2">
+	    <p class="lead">지금 어떤 음악을 듣고 싶으세요?</p>
+
+		<form method="POST" class="query-form">{% csrf_token %}
+			<div class="input-group">
+				<input type="text" class="form-control" name="title" id="id_title" placeholder="예) 여행가고 싶을 때 들으면 좋은 노래, 지친 나를 위로하는 음악,..."/> 
+				<span class="input-group-btn">
+					<button class="btn btn-success" type="submit">플레이리스트 만들기</button>
+				</span>
+			</div>
+		</form>
+	</div>
+</div><!-- /row -->
+
+{% endblock %}

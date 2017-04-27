@@ -1,0 +1,58 @@
+{% extends 'recomm/base.html' %}
+{% load static %}
+
+
+{% block content %}
+<div class="col-sm-5 col-sm-offset-1">
+	<div class="row">
+	    <h3>{{ query.title }}</h3>
+	</div>
+	
+	{% for title, artist, songUrl in query_playlist %}
+	<div class="row">
+		<h4>{{ title }}<small>| {{ artist }} </small></h4>
+		<audio id="query-playlist-{{ forloop.counter }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "preload": "auto" }' style="background-color:white; width:60%; height:3.5%; margin-bottom:2%; position:relative;">
+		<source src={{ songUrl }} type="rtmp/mp4">
+		</audio>
+	</div><!-- /row -->
+	{% endfor %}
+
+</div>
+
+<div class="col-sm-5">
+	<div class="row">
+	    <h3>어떻게 들으셨나요?</h3>
+	</div>
+	
+	<form method="POST" class="survey-form">{% csrf_token %}
+	{% for field in form %}
+	<div class="row">
+		<label class="control-label" for="id_{{ field.name }}"><h4>{{ field.label }}</h4></label>
+		<input type="text" class="likert-field" name="{{ field.name }}" id="id_{{ field.name }}" />
+	</div> 
+	{% endfor %}
+	<div class="row">
+		<button class="btn btn-success" type="submit">평가 보내기</button>
+	</div>
+	</form>
+	
+</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<script type="text/javascript" charset="utf-8">
+$(document).on('ready', function(){
+    $('.likert-field').rating({
+        step: 1,
+        starCaptions: {1: '전혀 그렇지 않다.', 2: '그렇지 않다.', 3: '보통이다.', 4: '그렇다.', 5: '매우 그렇다.'},
+        starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'},
+        size: 'sm',
+    });
+});
+</script>
+
+{% endblock %}
