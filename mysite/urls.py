@@ -15,8 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+# from django.conf import settings
+from django.contrib.staticfiles.views import serve
+
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'', include('recomm.urls')),
+    url(r'^static/(?P<path>.*)$', serve, kwargs={'insecure':True}),
+    url(r'^open/', include('open.urls')),
 ]

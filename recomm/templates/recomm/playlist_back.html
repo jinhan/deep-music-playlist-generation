@@ -1,0 +1,63 @@
+{% extends 'recomm/base.html' %}
+{% load static %}
+<!-- {% load shuffle %} -->
+
+{% block content %}
+
+	<div class="row">
+		<div class="col-sm-7 col-sm-offset-1">
+	    <h3>{{ query.title }}</h3>
+		</div>
+	</div>
+
+	<form method="POST" class="survey-form">{% csrf_token %}
+	{% for title, artist, songUrl, label in query_playlist %}
+	<div class="row">
+		<div class="col-sm-4 col-sm-offset-2">
+			<h4>{{ title }}<small> | {{ artist }} </small></h4>
+			<audio id="query-playlist-{{ forloop.counter }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "preload": "auto" }' style="background-color:white; width:80%; height:4%; margin-bottom:2%; position:relative;">
+				<source src={{ songUrl }} type="rtmp/mp4">
+				</audio>
+		</div>
+		<div class="col-sm-4">
+			<div class="row">
+				<label class="control-label" ><h4>1. 큰 제목에 적합한 노래인가요? </h4></label>
+				<input type="text" class="likert-field" name="q1_{{ forloop.counter }}" id="id_q1_{{ forloop.counter }}" />
+			</div>
+			<!-- <div class="row">
+				<label class="control-label" for="id_q2_{{ forloop.counter }}"><h4>2. 제목과 분위기가 유사하다. </h4></label>
+				<input type="text" class="likert-field" name="q2_{{ forloop.counter }}" id="id_q2_{{ forloop.counter }}" />
+			</div> -->
+		</div>
+	</div><!-- /row -->
+	<!-- <hr /> -->
+	{% endfor %}
+	<div class="row">
+		<div class="col-sm-8 col-sm-offset-1">
+			<button class="btn btn-success btn pull-right" type="submit">평가 보내기</button>
+		</div>
+	</div>
+</form>
+
+</div>
+
+{% endblock %}
+
+
+
+{% block scripts %}
+
+<script type="text/javascript" charset="utf-8">
+$(document).on('ready', function(){
+    $('.likert-field').rating({
+        step: 1,
+        starCaptions: {1: '전혀 그렇지 않다.', 2: '그렇지 않다.', 3: '보통이다.', 4: '그렇다.', 5: '매우 그렇다.'},
+        starCaptionClasses: {1: 'text-danger', 2: 'text-warning', 3: 'text-info', 4: 'text-primary', 5: 'text-success'},
+        size: 'sm',
+    });
+});
+
+
+</script>
+
+{% endblock %}

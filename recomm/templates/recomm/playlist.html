@@ -1,41 +1,67 @@
 {% extends 'recomm/base.html' %}
 {% load static %}
 
-
 {% block content %}
-<div class="col-sm-5 col-sm-offset-1">
+
 	<div class="row">
+		<div class="col-sm-7 col-sm-offset-1">
 	    <h3>{{ query.title }}</h3>
+		</div>
 	</div>
-	
-	{% for title, artist, songUrl in query_playlist %}
-	<div class="row">
-		<h4>{{ title }}<small>| {{ artist }} </small></h4>
-		<audio id="query-playlist-{{ forloop.counter }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "preload": "auto" }' style="background-color:white; width:60%; height:3.5%; margin-bottom:2%; position:relative;">
-		<source src={{ songUrl }} type="rtmp/mp4">
-		</audio>
-	</div><!-- /row -->
-	{% endfor %}
 
-</div>
-
-<div class="col-sm-5">
-	<div class="row">
-	    <h3>어떻게 들으셨나요?</h3>
-	</div>
-	
 	<form method="POST" class="survey-form">{% csrf_token %}
-	{% for field in form %}
+	{% for title, artist, songUrl, label in query_playlist %}
 	<div class="row">
-		<label class="control-label" for="id_{{ field.name }}"><h4>{{ field.label }}</h4></label>
-		<input type="text" class="likert-field" name="{{ field.name }}" id="id_{{ field.name }}" />
-	</div> 
+		<br><br>
+		<div class="col-sm-4 col-sm-offset-2">
+			<h4></h4>
+			<!-- <h4>{{ title }}<small> | {{ artist }} </small></h4> -->
+			<audio id="query-playlist-{{ forloop.counter }}" class="video-js vjs-default-skin" data-setup='{ "controls": true, "preload": "auto" }' style="background-color:white; width:80%; height:3%; margin-bottom:2%; position:relative;">
+				<source src={{ songUrl }} type="rtmp/mp4">
+				</audio>
+		</div>
+
+		<div class="col-sm-4">
+			<div class="row">
+				<label class="control-label" ><h4>1. 플레이리스트 제목에 적합한 노래인가요? </h4></label>
+				<input type="text" class="likert-field" name="q1_{{ forloop.counter }}_0" id="id_q1_{{ forloop.counter }}_0" />
+			</div>
+
+			<div class="row">
+				<label class="control-label" ><h4>2. 적합하다고 생각한 이유를 모두 골라주세요. </h4></label>
+				<div class="form-inline">
+					<label class="checkbox"> <input type="checkbox" name="q2_{{ forloop.counter }}_1" id="id_q2_{{ forloop.counter }}_1" value="1" ><small> 내용 </small></h4></label>
+	 				<label class="checkbox"> <input type="checkbox" name="q2_{{ forloop.counter }}_2" id="id_q2_{{ forloop.counter }}_2" value="2" ><small> 분위기 </small></h4></label>
+					<label class="checkbox"> <input type="checkbox" name="q2_{{ forloop.counter }}_3" id="id_q2_{{ forloop.counter }}_3" value="3" ><small> 보기 없음 </small></h4></label>
+					<!-- <label class="checkbox"> <input type="checkbox" name="q2_{{ forloop.counter }}_4" id="id_q2_{{ forloop.counter }}_4" value="4" ><small> 멜로디 </small></h4></label>
+					<label class="checkbox"> <input type="checkbox" name="q2_{{ forloop.counter }}_5" id="id_q2_{{ forloop.counter }}_5" value="5" ><small> 보기 없음 </small></h4></label> -->
+				</div>
+			</div>
+
+			<div class="row">
+				<label class="control-label" ><h4>3. 적합하지 않다고 생각한 이유를 모두 골라주세요. </h4></label>
+				<div class="form-inline">
+					<label class="checkbox"> <input type="checkbox" name="q3_{{ forloop.counter }}_1" id="id_q3_{{ forloop.counter }}_1" value="1" ><small> 내용 </small></h4></label>
+	 				<label class="checkbox"> <input type="checkbox" name="q3_{{ forloop.counter }}_2" id="id_q3_{{ forloop.counter }}_2" value="2" ><small> 분위기 </small></h4></label>
+					<label class="checkbox"> <input type="checkbox" name="q3_{{ forloop.counter }}_3" id="id_q3_{{ forloop.counter }}_3" value="3" ><small> 보기 없음 </small></h4></label>
+					<!-- <label class="checkbox"> <input type="checkbox" name="q3_{{ forloop.counter }}_4" id="id_q3_{{ forloop.counter }}_4" value="4" ><small> 멜로디 </small></h4></label>
+					<label class="checkbox"> <input type="checkbox" name="q3_{{ forloop.counter }}_5" id="id_q3_{{ forloop.counter }}_5" value="5" ><small> 보기 없음 </small></h4></label> -->
+				</div>
+			</div>
+		</div>
+
+	</div>
+	<!-- <hr /> -->
 	{% endfor %}
 	<div class="row">
-		<button class="btn btn-success" type="submit">평가 보내기</button>
+		<br>
+		<div class="col-sm-4 col-sm-offset-2">
+		</div>
+		<div class="col-sm-4">
+			<button class="btn btn-success btn pull-right" type="submit">평가 보내기 <small>( {{ counter }}번 남았어요.)</small></button>
+		</div>
 	</div>
 	</form>
-	
 </div>
 
 {% endblock %}
@@ -43,7 +69,6 @@
 
 
 {% block scripts %}
-
 <script type="text/javascript" charset="utf-8">
 $(document).on('ready', function(){
     $('.likert-field').rating({
@@ -53,6 +78,7 @@ $(document).on('ready', function(){
         size: 'sm',
     });
 });
-</script>
 
+
+</script>
 {% endblock %}

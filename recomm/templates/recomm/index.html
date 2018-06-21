@@ -5,16 +5,61 @@
 <div class="row">
 	<div class="col-xs-8 col-xs-offset-2">
 	    <p class="lead">지금 어떤 음악을 듣고 싶으세요?</p>
+			<p> 안녕하세요. 서울대학교 인간중심컴퓨팅연구실입니다. 우리는 자연어 기반 음악 검색 서비스를 만들고 있습니다. 본 웹페이지는 우리의 음악 검색 서비스의 평가를 위해 만들어졌습니다.</p>
+			<p> 만약 여러분이 실험에 참여하시게 되면, 제시되는 플레이리스트 제목에 대해 추천된 노래를 들어보면서 각각의 노래를 평가하게 됩니다. 하단의 '평가보내기' 버튼을 누르면 다음 플레이리스트 제목으로 넘어가고, 총 10개의 플레이리스트 제목을 평가해주시면 됩니다. </p>
+			<p> 실험 소요시간은 약 한 시간입니다. 실험에 참여해주시는 분들께 추첨을 통해 스타벅스 아메리카노 교환권을 드립니다. 참여를 원하시면 이메일, 성별, 나이를 입력하시고 '실험 시작' 버튼을 눌러주세요. 고맙습니다 :) </p>
+			<p> Mac에서는 Safari, Windows에서는 Internet Explorer을 이용해주세요.</p>
+	</div>
+</div>
 
+<div class="row">
+	<br>
+	<div class="col-xs-4 col-xs-offset-2">
 		<form method="POST" class="query-form">{% csrf_token %}
-			<div class="input-group">
-				<input type="text" class="form-control" name="title" id="id_title" placeholder="예) 여행가고 싶을 때 들으면 좋은 노래, 지친 나를 위로하는 음악,..."/> 
-				<span class="input-group-btn">
-					<button class="btn btn-success" type="submit">플레이리스트 만들기</button>
-				</span>
+			<div class="form-group">
+				<label for="exampleInputName2">이메일</label>
+				<input type='text' class="form-control" name="email" id="id_email" placeholder="jinhanchoi@snu.ac.kr">
 			</div>
+			<div class="form-group">
+				<label for="exampleInputName2">성별</label><br>
+				<label class="radio-inline">
+  				<input type="radio" name="male" id="id_male" value="m"> 남
+				</label>
+				<label class="radio-inline">
+  				<input type="radio" name="female" id="id_female" value="f"> 여
+				</label>
+			</div>
+			<div class="form-group">
+				<label for="exampleInputName2">나이</label>
+				<input type='text' class="form-control" name="birth" id="id_birth" placeholder="태어난 연도를 입력해주세요. (예: 1987, 2002) ">
+			</div>
+				<!-- <span class="input-group-btn"> -->
+			<button class="btn btn-success" type="submit">실험 시작</button>
+				<!-- </span> -->
+			</div>
+
 		</form>
 	</div>
-</div><!-- /row -->
+</div>
+<!-- <hr /> -->
+<div class="row">
+<br><br><br>
+</div>
+
+<div class="row" style="color:#777;">
+	<div class="col-xs-8 col-xs-offset-2">
+		<p> 노래가 재생되지 않을 때 Adobe Flash Player 설정을 확인해야 합니다.</p>
+		<ul class="list-unstyled"> Mac Safari
+		<li> 1. Safari > 환경설정 > 보안 > 플러그인 설정 > Adobe Flash Player </li>
+		<li> 2. 147.47.123.183 > 드랍다운메뉴에서 '켬'' 선택 > 완료 </li>
+		<li> 만약, 1번에서 Adobe Flash Player가 없다면  <a href=https://get.adobe.com/kr/flashplayer/otherversions/>여기</a>로 이동한 뒤, Mac for Safari and Firefox 선택하여 설치 후 재시도 </li>
+		</ul>
+		<!-- <ul class="list-unstyled"> Windows Chrome
+		<li> 1. 주소입력창 왼편의 느낌표를 클릭 </li>
+		<li> 2. '플래시'에서 '허용'을 선택 </li>
+		</ul> -->
+	</div>
+</div>
+
 
 {% endblock %}

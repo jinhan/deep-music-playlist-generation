@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '0*tf84v-bv8wpjveg8mrr_xf49y0jfz!g=j4+c7j@fgg61zd*8'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -37,8 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'recomm',
     'likert_field',
+    'recomm',
+    'open',
 ]
 
 MIDDLEWARE = [
@@ -85,8 +86,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'mysite',
-        'USER': 'jinhan',
-        'PASSWORD': 'wlsehf22wlsgks@',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': 'localhost',
         'PORT': '3306',
     }
@@ -129,12 +130,16 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.11/howto/static-files/
-
+# STATIC_ROOT = '/home/jinhan/Dropbox/evalbugs/static/'
 STATIC_URL = '/static/'
+# STATIC_URL = 'http://147.47.123.184:8000/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+# STATIC_ROOT = '/home/jinhan/Dropbox/evalbugs/static'
+
+
 # STATICFILES_DIRS = (
 #     os.path.join(BASE_DIR, 'static'),
+#     '/home/jinhan/Dropbox/evalbugs/static/',
 # )
 
-# SESSION_COOKIE_DOMAIN = "music.bugs.co.kr"
-
+# SESSION_COOKIE_DOMAIN = "147.47.123.184:8000"
